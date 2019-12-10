@@ -24,4 +24,10 @@ class GoodsController extends Controller
         $has = Input::has('username');
         dump($has);
     }
+
+    //获取浏览器的参数
+    public function requests(Request $request){
+
+    }
+
 }

@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('checkLogin');
 
 
 //定义访问/home的路由
@@ -85,3 +85,11 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('delete','Home\IndexController@delete');
     Route::get('select','Home\IndexController@select');
   });
+
+  //中间件组与路有前缀
+  Route::group(['prefix'=>'home/index/','middleware'=>['checkLogin']],function(){ 
+    Route::get('add','Home\IndexController@add');
+    Route::get('update','Home\IndexController@update');
+    Route::get('delete','Home\IndexController@delete');
+    Route::get('select','Home\IndexController@select');
+ });
