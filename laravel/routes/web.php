@@ -126,3 +126,8 @@ Route::get('/', function () {
 // });
 
 
+//view
+Route::get('/admin/index/views', function () { 
+    //return view('admin.greeting', ['name' => 'James']);
+    return view('admin.greeting')->with(['name'=>'jodan']);
+ });
