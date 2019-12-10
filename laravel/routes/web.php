@@ -93,3 +93,6 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('delete','Home\IndexController@delete');
     Route::get('select','Home\IndexController@select');
  });
+
+ //request
+ Route::get('home/goods/requests/{id}','GoodsController@requests');
