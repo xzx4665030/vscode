@@ -96,3 +96,33 @@ Route::group(['prefix'=>'admin'],function(){
 
  //request
  Route::get('home/goods/requests/{id}','GoodsController@requests');
+
+
+ //response
+ Route::get('/{minutes}', function ($minutes) {
+    return response('Hello World', 200)                  
+          ->header('Content-Type', 'text/plain')
+          ->header('X-Header-One', 'Header Value1')           
+          ->header('X-Header-Two', 'Header Value2')
+          ->cookie('age', '18', $minutes)
+          ->cookie('name', 'xzx', $minutes);
+});
+
+
+//redirect重定向
+// Route::get('/', function () {
+//     return redirect('/home/goods/food');
+// });
+
+
+//redirect跳转到控制器 Action
+Route::get('/', function () {
+    return redirect()->action('Admin\IndexController@index');
+});
+
+//redirect跳转到外部域名
+// Route::get('/', function () {
+//     return redirect()->away('https://www.google.com');
+// });
+
+
