@@ -131,3 +131,9 @@ Route::get('/admin/index/views', function () {
     //return view('admin.greeting', ['name' => 'James']);
     return view('admin.greeting')->with(['name'=>'jodan']);
  });
+
+ //session获取
+ Route::get('/admin/index/session', 'Admin\IndexController@session');
+
+ //闪存缓存
+ Route::get('/admin/index/sessionFlash', 'Admin\IndexController@sessionFlash');
