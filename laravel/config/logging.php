@@ -34,9 +34,23 @@ return [
     */
 
     'channels' => [
+        //自定义频道
+        'myapplog' => [
+            // 日志驱动模式：
+            'driver' => 'daily',                            
+            // 日志存放路径
+            'path' => storage_path('logs/myapplog.log'),
+            // 日志等级：
+            'level' => 'info',
+            // 日志分片周期，多少天一个文件
+            'days' => 1,
+            // 挂载日志格式接口（重点）
+            'tap' => [App\Logging\ApplogFormatter::class],
+        ],
+
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily'],
+            'channels' => ['single','daily'],
             'ignore_exceptions' => false,
         ],
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePost;
+use Log;
 
 
 class IndexController extends Controller
@@ -59,6 +60,22 @@ class IndexController extends Controller
     //保存表单——表单请求
     public function storeForm(StorePost $request){
         $validated = $request->validated();
+    }
+
+    //日志
+    public function log(){
+        $message = 'Some message';
+        $log = ['user_id'=>1,'user_name'=>'abcd']; 
+        Log::channel('myapplog')->info($message, $log);  //Log后的数组会自动转成Json存到日志记录中
+
+        Log::info($log);
+    }
+
+    //自定义json格式日志
+    public function Jsonlog(){
+        $message = 'Some message';
+        $log = ['user_id'=>1,'user_name'=>'abcd']; 
+        Log::channel('myapplog')->info($message, $log);  //Log后的数组会自动转成Json存
     }
 
 

@@ -143,3 +143,8 @@ Route::get('/admin/index/create', 'Admin\IndexController@create');
 Route::post('/admin/index/store', 'Admin\IndexController@store');
 
 Route::post('/admin/index/storeForm', 'Admin\IndexController@storeForm');
+
+
+//日志
+Route::get('/admin/index/log', 'Admin\IndexController@log');
+Route::get('/admin/index/Jsonlog', 'Admin\IndexController@Jsonlog');
