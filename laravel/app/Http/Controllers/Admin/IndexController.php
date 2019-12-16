@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePost;
+
 
 class IndexController extends Controller
 {
@@ -11,6 +13,7 @@ class IndexController extends Controller
     public function index(){
         echo "admin的index方法";
     }
+    
 
     //获取session
     public function session(Request $request){
@@ -38,6 +41,24 @@ class IndexController extends Controller
     public function sessionFlash(){
         $status = session('status');
         dump($status);
+    }
+
+    //显示并创建表单
+    public function create(){
+        return view('admin/create');
+    }
+
+    //保存表单
+    public function store(Request $request){
+        $validatedData = $request->validate([      
+            'title' => 'bail|required|unique:posts|max:255',      //某个属性第一次验证失败后停止运行验证规则，你需要附加 bail 规则到该属性  
+            'body' => 'required',    
+        ]);
+    }
+
+    //保存表单——表单请求
+    public function storeForm(StorePost $request){
+        $validated = $request->validated();
     }
 
 

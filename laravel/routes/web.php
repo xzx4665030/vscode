@@ -133,7 +133,13 @@ Route::get('/admin/index/views', function () {
  });
 
  //session获取
- Route::get('/admin/index/session', 'Admin\IndexController@session');
+Route::get('/admin/index/session', 'Admin\IndexController@session');
 
  //闪存缓存
- Route::get('/admin/index/sessionFlash', 'Admin\IndexController@sessionFlash');
+Route::get('/admin/index/sessionFlash', 'Admin\IndexController@sessionFlash');
+
+//表单验证
+Route::get('/admin/index/create', 'Admin\IndexController@create');
+Route::post('/admin/index/store', 'Admin\IndexController@store');
+
+Route::post('/admin/index/storeForm', 'Admin\IndexController@storeForm');
