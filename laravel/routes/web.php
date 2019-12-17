@@ -99,14 +99,14 @@ Route::group(['prefix'=>'admin'],function(){
 
 
  //response
- Route::get('/{minutes}', function ($minutes) {
-    return response('Hello World', 200)                  
-          ->header('Content-Type', 'text/plain')
-          ->header('X-Header-One', 'Header Value1')           
-          ->header('X-Header-Two', 'Header Value2')
-          ->cookie('age', '18', $minutes)
-          ->cookie('name', 'xzx', $minutes);
-});
+//  Route::get('/{minutes}', function ($minutes) {
+//     return response('Hello World', 200)                  
+//           ->header('Content-Type', 'text/plain')
+//           ->header('X-Header-One', 'Header Value1')           
+//           ->header('X-Header-Two', 'Header Value2')
+//           ->cookie('age', '18', $minutes)
+//           ->cookie('name', 'xzx', $minutes);
+// });
 
 
 //redirect重定向
@@ -148,3 +148,23 @@ Route::post('/admin/index/storeForm', 'Admin\IndexController@storeForm');
 //日志
 Route::get('/admin/index/log', 'Admin\IndexController@log');
 Route::get('/admin/index/Jsonlog', 'Admin\IndexController@Jsonlog');
+
+//模板继承
+Route::get('/views/blade', function () {  
+    return view('child');
+});
+
+//模板组件与插槽
+Route::get('/views/useAlert', function () {  
+    return view('useAlert');
+});
+
+//显示变量
+Route::get('/show/{point?}', function ($point = 0) {  
+    $data = [
+        0=>['name'=>'xzx','age'=>13],
+        1=>['name'=>'zhang','age'=>15],
+        2=>['name'=>'wang','age'=>3],
+    ];
+    return view('show', ['name' => 'Samantha','point'=>$point,'data'=>$data]);
+});
