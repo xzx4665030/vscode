@@ -168,3 +168,15 @@ Route::get('/show/{point?}', function ($point = 0) {
     ];
     return view('show', ['name' => 'Samantha','point'=>$point,'data'=>$data]);
 });
+
+//检索文件
+Route::get('/admin/index/fileExits', 'Admin\IndexController@fileExits');
+
+//文件下载
+Route::get('/admin/index/downFile', 'Admin\IndexController@downFile');
+
+//文件上传
+Route::get('/admin/index/fileIndex', 'Admin\IndexController@fileIndex');
+Route::post('/admin/index/saveFile', 'Admin\IndexController@saveFile');
+
+Route::post('/admin/index/putFile', 'Admin\IndexController@putFile');
