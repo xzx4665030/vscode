@@ -84,6 +84,10 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('update','Home\IndexController@update');
     Route::get('delete','Home\IndexController@delete');
     Route::get('select','Home\IndexController@select');
+    //原始sql查询
+    Route::get('sql','Home\IndexController@sql');
+    //事务
+    Route::get('trans','Home\IndexController@trans');  
   });
 
   //中间件组与路有前缀
