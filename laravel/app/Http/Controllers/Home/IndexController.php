@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Illuminate\Contracts\Support\JsonableInterface;
 
 class IndexController extends Controller
 {
@@ -107,4 +108,24 @@ class IndexController extends Controller
         dump($when);
 
     }
+
+    //分页
+    public function page(){
+        //分页构造器
+        //$users = DB::table('member')->paginate(2);
+
+        //简单分页
+        //$users = DB::table('member')->simplePaginate(2);
+
+        //结果转化为JSON
+        $users = DB::table('member')->paginate(2);
+        return response()->json([
+            'status' => true,
+            'code'  => 200,
+            'message' => 'json数据',
+            'data'  => $users,
+        ]);
+        //return view('page', ['users' => $users]);
+    }
+
 }

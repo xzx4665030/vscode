@@ -91,6 +91,9 @@ Route::group(['prefix'=>'admin'],function(){
     
     //构造器
     Route::get('constructor','Home\IndexController@constructor');
+
+    //分页
+    Route::get('page','Home\IndexController@page');
   });
 
   //中间件组与路有前缀
