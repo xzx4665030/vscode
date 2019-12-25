@@ -190,3 +190,6 @@ Route::get('/admin/index/fileIndex', 'Admin\IndexController@fileIndex');
 Route::post('/admin/index/saveFile', 'Admin\IndexController@saveFile');
 
 Route::post('/admin/index/putFile', 'Admin\IndexController@putFile');
+
+//redis
+Route::get('home/index/redis', 'Home\IndexController@redis');

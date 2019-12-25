@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Contracts\Support\JsonableInterface;
+use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
 {
@@ -126,6 +127,14 @@ class IndexController extends Controller
             'data'  => $users,
         ]);
         //return view('page', ['users' => $users]);
+    }
+
+
+    //redis
+    public function redis(){
+        Redis::set('name', 'Taylor');
+        $redisValue = Redis::get('name');
+        dump($redisValue);
     }
 
 }
