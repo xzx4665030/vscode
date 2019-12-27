@@ -201,14 +201,18 @@ class IndexController extends Controller
 
     //模型 多态关联
     public function modelMorph(){
+        DB::connection()->enableQueryLog();
         //获取member表的图片
-        $result = Member::find(2);
-        $image = $result->images;
+        // $result = Member::find(2);
+        // $image = $result->images;
         //dump($image);
 
         //执行 morphTo 调用的方法名来从多态模型中获知父模型
+
         $result1 = Image::find(2);
         $images = $result1->imageModel;
+        $log = DB::getQueryLog();
+        dump($log);
         dump($images);
     }
 
