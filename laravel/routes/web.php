@@ -193,3 +193,12 @@ Route::post('/admin/index/putFile', 'Admin\IndexController@putFile');
 
 //redis
 Route::get('home/index/redis', 'Home\IndexController@redis');
+
+//Eloquent
+Route::get('home/index/models', 'Home\IndexController@models');
+
+//模型关联
+Route::get('home/index/modelInteraction', 'Home\IndexController@modelInteraction');
+
+//多态关联
+Route::get('home/index/modelMorph', 'Home\IndexController@modelMorph');

@@ -8,6 +8,10 @@ use DB;
 use Illuminate\Contracts\Support\JsonableInterface;
 use Illuminate\Support\Facades\Redis;
 
+use App\Member;
+use App\Card;
+use App\Image;
+
 class IndexController extends Controller
 {
     //
@@ -136,5 +140,78 @@ class IndexController extends Controller
         $redisValue = Redis::get('name');
         dump($redisValue);
     }
+
+    //Eloquent
+    public function models(Request $request){
+        $member = new Member;
+        $list = $member->all();
+        //dump($list);
+
+        //分块结果
+        Member::chunk(2,function($memberList){
+            foreach($memberList as $mem){
+                //dump($mem);
+            }
+        });
+
+        //检索单个模型 / 集合
+        $sampleResult = $member->find(1);
+        $sampleResult = $member->first();
+        //dump($sampleResult);
+
+        //检索集合
+        $setResultCount = $member->count();
+        $setResultMax = $member->max('age');
+        $setResultSum = $member->sum('age');
+        // dump($setResultCount);
+        // dump($setResultMax);
+        // dump($setResultSum);
+
+        //插入 配合 Request $request
+        // $member->name = $request->name;
+        // $member->age = $request->age;
+        // $saveResult = $member->save();
+        // dump($saveResult);
+
+        //批量赋值 —— 在模型中定义的批量赋值的属性可以插入，之外的不行
+        //$createResult = $member->create(['name'=>'杜玉明','age'=>61]);
+        //dump($createResult);
+
+        //删除模型
+        // $findResult = $member->find(1);
+        // $deleteResult = $findResult->delete();
+        // dump($deleteResult);
+
+    }
+
+    public function modelInteraction(){
+        $member = new Member;
+        //一对一
+        $hasResult = Member::find(2)->cardNum;
+        //dump($hasResult);
+        //定义反向关联
+        $belongResult = Card::find(2)->member;
+        //dump($belongResult);
+
+        //一对多
+        $manyResult = $member->find(2)->cardNums;
+        dump($manyResult);
+    }
+
+
+    //模型 多态关联
+    public function modelMorph(){
+        //获取member表的图片
+        $result = Member::find(2);
+        $image = $result->images;
+        //dump($image);
+
+        //执行 morphTo 调用的方法名来从多态模型中获知父模型
+        $result1 = Image::find(2);
+        $images = $result1->imageModel;
+        dump($images);
+    }
+
+
 
 }
