@@ -12,6 +12,8 @@ use App\Member;
 use App\Card;
 use App\Image;
 
+use Mail;
+
 class IndexController extends Controller
 {
     //
@@ -216,6 +218,47 @@ class IndexController extends Controller
         dump($images);
     }
 
+    //发送邮件
+    public function sendEmail(){
+        // ​1:Mail::raw  是发送原生数据,其他的内容发送方式在手册里都有提供;
+        // 2.$message->subjuet('');是文件的标题
+        // 3.$message->to();发送给谁
+        // Mail::raw('你好，我是PHP程序！', function ($message) {
+        //     $to = '1310271150@qq.com';
+        //     $message ->to($to)->subject('纯文本信息邮件测试');
+        // });
+
+        //发送附件 ——  Mail::send();需要传三个参数，第一个为引用的模板，第二个为给模板传递的变量（邮箱发送的文本内容），第三个为一个闭包，参数绑定Mail类的一个实例
+        //$image = Storage::get('images/obama.jpg'); //本地文件
+        // $name = '大象';
+        // $image = 'http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E5%9B%BE%E7%89%87&hs=0&pn=0&spn=0&di=219560&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&ie=utf-8&oe=utf-8&cl=2&lm=-1&cs=3381573685%2C1866477444&os=1766358314%2C1969526767&simid=4274224315%2C682407512&adpicid=0&lpn=0&ln=30&fr=ala&fm=&sme=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fdmimg.5054399.com%2Fallimg%2Fpkm%2Fpk%2F22.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3F14_z%26e3B9nll_z%26e3Bv54AzdH3Ffijgqtkw5kjtAzdH3Fp7rtwgAzdH3Fda888dd9-mbbnb-da_z%26e3Bip4s&gsm=&islist=&querylist=';//网上图片
+        // Mail::send('mail.test',['image'=>$image,'name'=>$name],function($message){ 
+        //     $to = '1310271150@qq.com';
+        //     $message->to($to)->subject('图片测试'); 
+        // }); 
+        // if(count(Mail::failures()) < 1){
+        //     echo '发送邮件成功，请查收！'; 
+        // }else{
+        //     echo '发送邮件失败，请重试！';
+        // } 
+
+        //发送邮件附件
+        $name = '我发的第一份邮件'; 
+        //$image = storage_path('app/2019_12_18/fe2e2988953e999e5b1a82623a75af1e1069.jpg');
+        Mail::send('mail.test',['name'=>$name],function($message){ 
+            $to = '1310271150@qq.com';
+            $message->to($to)->subject('邮件测试'); 
+            $attachment = storage_path('app/agent1128.docx');
+            // 在邮件中上传附件 ,防止显示文件名乱码
+            $message->attach($attachment,['as'=>"=?UTF-8?B?".base64_encode('代理商首页需求文档1128')."?=.docx"]);
+        }); 
+
+        
+    }
+
+    public function build(){
+        return $this->view('mail.test');
+    }
 
 
 }

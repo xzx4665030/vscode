@@ -202,3 +202,6 @@ Route::get('home/index/modelInteraction', 'Home\IndexController@modelInteraction
 
 //多态关联
 Route::get('home/index/modelMorph', 'Home\IndexController@modelMorph');
+
+//发送邮件
+Route::get('home/index/sendEmail', 'Home\IndexController@sendEmail');
